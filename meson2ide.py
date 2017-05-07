@@ -94,6 +94,14 @@ def load_compile_db(file_name):
         file_db.append({ 'src': header_file, 'include_dirs': include_dirs, 'defines': defines})
   return file_db
 
+def collect_meson_files(src_dir):
+  meson_files = []
+  for root, dir_names, file_names in os.walk(src_dir):
+    for file_name in file_names:
+      if file_name == 'meson.build':
+        meson_files.append(os.path.abspath(os.path.join(root, file_name)))
+  return meson_files
+
 def mesonintrospect(commands, build_dir):
   args = ['mesonintrospect.py']
   args.extend(commands)
@@ -135,6 +143,7 @@ def generator_qtcreator(build_dir, src_dir):
   files = []
   for item in file_db:
     files.append(item['src'])
+  files.extend(collect_meson_files(src_dir))
   files = sorted(list(set(files)))
   with open(files_file, 'w') as file:
     for item in files:
