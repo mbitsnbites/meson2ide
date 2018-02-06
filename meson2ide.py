@@ -103,7 +103,7 @@ def collect_meson_files(src_dir):
   return meson_files
 
 def mesonintrospect(commands, build_dir):
-  args = ['mesonintrospect.py']
+  args = ['meson', 'introspect']
   args.extend(commands)
   return subprocess.check_output(args, stderr=subprocess.STDOUT, cwd=build_dir)
 
