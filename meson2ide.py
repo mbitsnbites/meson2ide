@@ -145,6 +145,7 @@ def generator_qtcreator(build_dir, src_dir):
         file.write('// Add predefined macros for your project here. For example:\n')
         file.write('// #define THE_ANSWER 42\n')
         for item in defines:
+            item = ' '.join(item.split('='))
             file.write('#define %s\n' % item)
 
     # Generate the .files file.
