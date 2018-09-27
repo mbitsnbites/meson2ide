@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import argparse
 import json
 import os
@@ -59,7 +59,7 @@ def gcc_get_included_files(cmd, dir):
                     files.append(file_name)
         return list(set(files))
     except:
-        print 'FAIL'
+        print('FAIL')
         return []
 
 
@@ -72,7 +72,7 @@ def collect_header_files(cmd, dir):
 
 def load_compile_db(file_name):
     with open(file_name, 'r') as file:
-        db_json = json.loads(file.read())
+        db_json = json.load(file)
     file_db = []
     found_headers = set()
     for item in db_json:
