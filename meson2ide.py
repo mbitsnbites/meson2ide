@@ -108,14 +108,14 @@ def collect_meson_files(src_dir):
     return meson_files
 
 
-def mesonintrospect(commands, build_dir):
-    args = ['meson', 'introspect']
-    args.extend(commands)
-    return subprocess.check_output(args, stderr=subprocess.STDOUT, cwd=build_dir)
+def mesonintrospect(arguments):
+    command = ['meson', 'introspect']
+    command.extend(arguments)
+    return subprocess.check_output(command, stderr=subprocess.STDOUT)
 
 
 def get_project_name(build_dir):
-    info = json.loads(mesonintrospect(['--projectinfo'], build_dir))
+    info = json.loads(mesonintrospect(['--projectinfo', build_dir]))
     return info['name']
 
 
